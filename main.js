@@ -34,11 +34,6 @@ const render = function () {
         });
     });
     localStorage.setItem('todoObject', JSON.stringify(todoData));
-
-    // if (localStorage.getItem('setItem')) {
-    //     todoData.push(...JSON.parse(localStorage.getItem('setItem')));
-    //     render();
-    // }
 };
 
 
@@ -46,10 +41,7 @@ if (localStorage.getItem('todoObject')) {
     todoData.push(...JSON.parse(localStorage.getItem('todoObject')));
     render();
 }
-// if (localStorage.getItem('setItem')) {
-//     todoData.push(...JSON.parse(localStorage.getItem('setItem')));
-//     render();
-// }
+
 
 todoControl.addEventListener('submit', function (event) {
     event.preventDefault();
