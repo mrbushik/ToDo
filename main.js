@@ -6,20 +6,36 @@ console.log(todoControl);
 console.log(headerInput);
 console.log(todoList);
 console.log(todoCompleted);
-const todoData = [{
-        text: "сварить кофе",
-        complited: false
+const todoData = [
 
-    },
-    {
-        text: 'Помыть посуду',
-        complited: true
-    },
 ];
 const render = function () {
+    todoList.innerHTML = "";
+    todoCompleted.innerHTML = "";
     todoData.forEach(function (item) {
-        console.log(item);
-    })
+        // todo-item
+        const li = document.createElement('li');
+        li.classList.add('todo-item');
+        li.innerHTML = '<span class="text-todo">' + item.text + '</span>' +
+            '<div class="todo-buttons">' +
+            '<button class="todo-remove"></button>' +
+            '<button class="todo-complete"></button>' +
+            '</div>';
+        if (item.complited) {
+            todoCompleted.append(li);
+        } else {
+            todoList.append(li);
+        }
+        li.querySelector('.todo-complete').addEventListener('click', function () {
+            item.complited = !item.complited;
+            render();
+        });
+        let todoRemove = li.querySelector('.todo-remove')
+        todoRemove.addEventListener('click', function () {
+            li.remove();
+
+        });
+    });
 
 }
 todoControl.addEventListener('submit', function (event) {
