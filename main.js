@@ -13,7 +13,6 @@ const render = function () {
     todoList.innerHTML = "";
     todoCompleted.innerHTML = "";
     todoData.forEach(function (item) {
-        // todo-item
         const li = document.createElement('li');
         li.classList.add('todo-item');
         li.innerHTML = '<span class="text-todo">' + item.text + '</span>' +
@@ -30,21 +29,26 @@ const render = function () {
             item.complited = !item.complited;
             render();
         });
-        let todoRemove = li.querySelector('.todo-remove')
-        todoRemove.addEventListener('click', function () {
-            li.remove();
-
-        });
+        li.querySelector('.todo-remove').addEventListener('click', function () {
+            let index = todoData.indexOf(item);
+            todoData.splice(index, 1);
+            render();
+        })
     });
 
 }
 todoControl.addEventListener('submit', function (event) {
     event.preventDefault();
+
     const newTodo = {
         text: headerInput.value,
         complited: false
     };
-    todoData.push(newTodo);
-    headerInput.value = '';
-    render();
-})
+
+
+    if (newTodo.text.trim() != '') {
+        todoData.push(newTodo);
+        headerInput.value = '';
+        render();
+    }
+});
