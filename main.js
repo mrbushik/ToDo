@@ -6,9 +6,7 @@ console.log(todoControl);
 console.log(headerInput);
 console.log(todoList);
 console.log(todoCompleted);
-const todoData = [
-
-];
+const todoData = [];
 const render = function () {
     todoList.innerHTML = "";
     todoCompleted.innerHTML = "";
@@ -33,13 +31,28 @@ const render = function () {
             let index = todoData.indexOf(item);
             todoData.splice(index, 1);
             render();
-        })
+        });
     });
+    localStorage.setItem('todoObject', JSON.stringify(todoData));
 
+    // if (localStorage.getItem('setItem')) {
+    //     todoData.push(...JSON.parse(localStorage.getItem('setItem')));
+    //     render();
+    // }
+};
+
+
+if (localStorage.getItem('todoObject')) {
+    todoData.push(...JSON.parse(localStorage.getItem('todoObject')));
+    render();
 }
+// if (localStorage.getItem('setItem')) {
+//     todoData.push(...JSON.parse(localStorage.getItem('setItem')));
+//     render();
+// }
+
 todoControl.addEventListener('submit', function (event) {
     event.preventDefault();
-
     const newTodo = {
         text: headerInput.value,
         complited: false
